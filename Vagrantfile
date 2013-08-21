@@ -28,14 +28,7 @@ Vagrant.configure("2") do |config|
     override.ssh.private_key_path = "/Users/yamir/.ssh/yencarnacion_key.pem"
   end
 
-  config.vm.provision :shell, :path => "bootstrap.sh"
-
-  # config.vm.provision :chef_client do |chef|
-  #    chef.validation_client_name = "webninjapr-validator"
-  #    chef.client_key_path ="/Users/yamir/Dropbox/Stuff/WebNinjaCorp/Other/Digital-ID/chef-opscode/yencarnacionATwebninjapr_com.pem"
-  #    chef.chef_server_url = "https://api.opscode.com/organizations/webninjapr"
-  #    chef.validation_key_path = "/Users/yamir/Dropbox/Stuff/WebNinjaCorp/Other/Digital-ID/chef-opscode/webninjapr_com/webninjapr-validator.pem"
-  # end
+  # config.vm.provision :shell, :path => "bootstrap.sh"
 
   config.vm.provision :chef_solo do |chef|
     chef.provisioning_path = guest_cache_path
@@ -49,6 +42,13 @@ Vagrant.configure("2") do |config|
       recipe[docker]
     }
   end
+
+  #config.vm.provision :chef_client do |chef|
+  #    chef.validation_client_name = "webninjapr-validator"
+  #    chef.client_key_path ="/Users/yamir/Dropbox/Stuff/WebNinjaCorp/Other/Digital-ID/chef-opscode/yencarnacionATwebninjapr_com.pem"
+  #    chef.chef_server_url = "https://api.opscode.com/organizations/webninjapr"
+  #    chef.validation_key_path = "/Users/yamir/Dropbox/Stuff/WebNinjaCorp/Other/Digital-ID/chef-opscode/webninjapr_com/webninjapr-validator.pem"
+  #end
  
   config.vm.synced_folder host_cache_path, guest_cache_path
 end
